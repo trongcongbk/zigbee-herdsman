@@ -314,8 +314,29 @@ class ZStackAdapter extends Adapter {
                 break;
             }
         }
+        //CongNT16: add element for nodeDescriptorInterval
+        let rxOnWhenIdle: boolean = true;
+        if ((descriptor.payload.maccapflags & 0x08)===8) {
+            rxOnWhenIdle = true;
+        } else {
+            rxOnWhenIdle = false;
+        }
 
-        return {manufacturerCode: descriptor.payload.manufacturercode, type};
+        let fullFunctionDevice: boolean = true;
+        if ((descriptor.payload.maccapflags & 0x02)===2) {
+            fullFunctionDevice = true;
+        } else {
+            fullFunctionDevice = false;
+        }
+
+        let acPower: boolean = true;
+        if ((descriptor.payload.maccapflags & 0x04)===4) {
+            acPower = true;
+        } else {
+            acPower = false;
+        }
+        
+        return {manufacturerCode: descriptor.payload.manufacturercode, type, rxOnWhenIdle, fullFunctionDevice, acPower};
     }
 
     /* CongNT16: Add Match Descriptor Request function

@@ -434,13 +434,20 @@ class Device extends Entity {
             );
         });
 
+        //CongNT16
+        /*let defaultsend: SendRequestWhen;
+        if (type="EndDevice") {
+            defaultsend = 'active';
+        } else {
+            defaultsend = 'immediate';
+        }*/
         const ID = Entity.database.newID();
         const device = new Device(
             ID, type, ieeeAddr, networkAddress, manufacturerID, endpointsMapped, manufacturerName,
             powerSource, modelID, undefined, undefined, undefined, undefined, undefined, undefined,
             interviewCompleted, {}, null, 'immediate',
         );
-
+        
         Entity.database.insert(device.toDatabaseEntry());
         Device.devices[device.ieeeAddr] = device;
         return device;
@@ -547,6 +554,12 @@ class Device extends Entity {
             const nodeDescriptor = await Entity.adapter.nodeDescriptor(this.networkAddress);
             this._manufacturerID = nodeDescriptor.manufacturerCode;
             this._type = nodeDescriptor.type;
+            // CongNT16: configure _defaultSendRequestWhen based on rxOnWhenIdle
+            if (nodeDescriptor.rxOnWhenIdle === true) {
+                this._defaultSendRequestWhen = 'immediate';
+            } else {
+                this._defaultSendRequestWhen = 'active';
+            }
             this.save();
             debug.log(`Interview - got node descriptor for device '${this.ieeeAddr}'`);
         };

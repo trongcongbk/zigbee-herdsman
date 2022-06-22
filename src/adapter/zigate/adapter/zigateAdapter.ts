@@ -322,7 +322,7 @@ class ZiGateAdapter extends Adapter {
                 debug.log("RECEIVING NODE_DESCRIPTOR - addr: 0x" + networkAddress.toString(16)
                     + " type: " + type + " manufacturer: 0x" + manufacturer.toString(16));
 
-                return {manufacturerCode: manufacturer, type};
+                return {manufacturerCode: manufacturer, type, rxOnWhenIdle: true, fullFunctionDevice: true, acPower: true};
             } catch (error) {
                 debug.error("RECEIVING NODE_DESCRIPTOR FAILED - addr: 0x"
                     + networkAddress.toString(16) + " " + error);

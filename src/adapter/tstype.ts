@@ -32,6 +32,9 @@ type StartResult = 'resumed' | 'reset' | 'restored';
 interface NodeDescriptor {
     type: DeviceType;
     manufacturerCode: number;
+    rxOnWhenIdle: boolean;
+    fullFunctionDevice: boolean;
+    acPower: boolean;
 }
 
 //CongNT16: Add Match Descriptor Request function

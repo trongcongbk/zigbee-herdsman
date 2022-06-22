@@ -271,7 +271,8 @@ class EZSPAdapter extends Adapter {
         const logicaltype = descriptor[3].byte1 & 0x07;
         return {
             manufacturerCode: descriptor[3].manufacturer_code,
-            type: (logicaltype == 0) ? 'Coordinator' : (logicaltype == 1) ? 'Router' : 'EndDevice'
+            type: (logicaltype == 0) ? 'Coordinator' : (logicaltype == 1) ? 'Router' : 'EndDevice',
+            rxOnWhenIdle: true, fullFunctionDevice: true, acPower: true
         };
     }
     //CongNT16: add blank function
