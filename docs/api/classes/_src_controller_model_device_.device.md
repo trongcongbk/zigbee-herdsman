@@ -44,6 +44,7 @@
 * [ping](_src_controller_model_device_.device.md#ping)
 * [removeFromDatabase](_src_controller_model_device_.device.md#removefromdatabase)
 * [removeFromNetwork](_src_controller_model_device_.device.md#removefromnetwork)
+* [resetThisDevice](_src_controller_model_device_.device.md#resetthisdevice)
 * [routingTable](_src_controller_model_device_.device.md#routingtable)
 * [save](_src_controller_model_device_.device.md#save)
 * [updateLastSeen](_src_controller_model_device_.device.md#updatelastseen)
@@ -505,6 +506,15 @@ ___
 ### removeFromNetwork
 
 ▸ **removeFromNetwork**(): Promise\<void>
+
+*Defined in [src/controller/model/device.ts:535](https://github.com/Koenkk/zigbee-herdsman/blob/master/src/src/controller/model/device.ts#L535)*
+
+**Returns:** Promise\<void>
+
+___
+### resetThisDevice
+
+▸ **resetThisDevice**(): Promise\<void>
 
 *Defined in [src/controller/model/device.ts:535](https://github.com/Koenkk/zigbee-herdsman/blob/master/src/src/controller/model/device.ts#L535)*
 

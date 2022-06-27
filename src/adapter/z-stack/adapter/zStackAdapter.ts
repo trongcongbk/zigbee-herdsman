@@ -755,6 +755,24 @@ class ZStackAdapter extends Adapter {
         }, networkAddress);
     }
 
+    public resetDevice(networkAddress: number, ieeeAddr: string): Promise<void> {
+        return this.queue.execute<void>(async () => {
+            this.checkInterpanLock();
+            const response = this.znp.waitFor(
+                UnpiConstants.Type.AREQ, Subsystem.ZDO, 'mgmtLeaveRsp', {srcaddr: networkAddress}
+            );
+
+            const payload = {
+                dstaddr: networkAddress,
+                deviceaddress: ieeeAddr,
+                removechildrenRejoin: 1,
+            };
+
+            await this.znp.request(Subsystem.ZDO, 'mgmtLeaveReq', payload, response.ID);
+            await response.start().promise;
+        }, networkAddress);
+    }
+
     /**
      * Event handlers
      */

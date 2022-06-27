@@ -454,6 +454,9 @@ class EZSPAdapter extends Adapter {
             );
         }, networkAddress);
     }
+    public async resetDevice(networkAddress: number, ieeeAddr: string): Promise<void> {
+        debug("on development");
+    }
 
     public async getNetworkParameters(): Promise<NetworkParameters> {
         return {

@@ -855,6 +855,24 @@ class Device extends Entity {
         await this.removeFromDatabase();
     }
 
+    public async resetThisDevice(): Promise<void> {
+        if (this._type === 'GreenPower') {
+            const payload = {
+                options: 0x002550,
+                srcID: Number(this.ieeeAddr),
+            };
+
+            const frame = Zcl.ZclFrame.create(
+                Zcl.FrameType.SPECIFIC, Zcl.Direction.SERVER_TO_CLIENT, true,
+                null, ZclTransactionSequenceNumber.next(), 'pairing', 33, payload
+            );
+
+            await Entity.adapter.sendZclFrameToAll(242, frame, 242);
+        } else 
+            await Entity.adapter.resetDevice(this.networkAddress, this.ieeeAddr);
+        //await this.removeFromDatabase();
+    }
+
     public async removeFromDatabase(): Promise<void> {
         Device.loadFromDatabaseIfNecessary();
 

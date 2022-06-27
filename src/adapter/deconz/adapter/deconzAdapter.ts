@@ -821,6 +821,9 @@ class DeconzAdapter extends Adapter {
             throw new Error(error);
         }
     }
+    public async resetDevice(networkAddress: number, ieeeAddr: string): Promise<void> {
+        debug("on development");
+    }
 
     public async removeDevice(networkAddress: number, ieeeAddr: string): Promise<void> {
         const transactionID = this.nextTransactionID();

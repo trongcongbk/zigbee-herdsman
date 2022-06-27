@@ -501,6 +501,9 @@ class ZiGateAdapter extends Adapter {
                 }).catch(() => Promise.reject());
         }, networkAddress);
     };
+    public async resetDevice(networkAddress: number, ieeeAddr: string): Promise<void> {
+        debug.log("on development");
+    }
 
     public async sendZclFrameToEndpoint(
         ieeeAddr: string, networkAddress: number, endpoint: number, zclFrame: ZclFrame, timeout: number,
